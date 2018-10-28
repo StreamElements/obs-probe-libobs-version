@@ -1,4 +1,4 @@
-project (obs-probe-libobs-version)
+project (obs)
 
 #SET(CMAKE_FIND_LIBRARY_SUFFIXES ".lib")
 #SET(BUILD_SHARED_LIBRARIES OFF)
@@ -14,17 +14,4 @@ SET("CMAKE_CXX_FLAGS_MINSIZEREL" "/MT /O1 /Ob1 /D NDEBUG")
 SET("CMAKE_CXX_FLAGS_RELEASE" "/MT /O2 /Ob2 /D NDEBUG")
 SET("CMAKE_CXX_FLAGS_RELWITHDEBINFO" "/MT /Zi /O2 /Ob1 /D NDEBUG")
 
-if(MSVC)
-	set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} /SAFESEH:NO")
-	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /EHc-")
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHc-")
-endif()
-
-add_executable(obs-probe-libobs-version WIN32 main.cpp)
-
-set_target_properties(obs-probe-libobs-version PROPERTIES LINK_FLAGS_RELEASE "/SUBSYSTEM:CONSOLE")
-set_target_properties(obs-probe-libobs-version PROPERTIES LINK_FLAGS_MINSIZEREL "/SUBSYSTEM:CONSOLE")
-
-target_link_libraries(obs-probe-libobs-version obs)
-
-add_subdirectory(obs)
+add_library(obs SHARED main.cpp)
